@@ -1,6 +1,185 @@
-{
-    "rewrites": [
-      { "source": "/", "destination": "/menu.htm" }
-    ]
-  }
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Menu Board</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        #menu {
+            background-color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three-column layout */
+            gap: 20px;
+            text-align: center;
+        }
+        .category {
+            grid-column: span 3;
+            font-size: 2em;
+            color: #fff;
+            margin-top: 20px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
+        }
+        .item-card {
+            background-color: #111;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .item-card img {
+            width: 150px; /* Increased size to 150px */
+            height: 150px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .item-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #fff;
+        }
+        .price {
+            color: #fff;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        .ingredients {
+            display: grid;
+            grid-template-columns: repeat(2, auto); /* Two-column grid for ingredients */
+            gap: 5px;
+            color: #ccc;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="menu"></div>
+
+    <script>
+        const menuData = {
+            "Hotdogs & Burgers": [
+                {
+                    "item": "Burger",
+                    "price": 8,
+                    "ingredients": ["Cheese", "Beef meat", "Lettuce", "Onion"],
+                    "image": "https://i.ibb.co/pvpyv4W/Burger.webp"
+                },
+                {
+                    "item": "Hotdog",
+                    "price": 6,
+                    "ingredients": ["Beef", "Bacon", "Onion", "Tomato"],
+                    "image": "https://i.ibb.co/s3hFnzY/hotdog.webp"
+                },
+                {
+                    "item": "Drink",
+                    "price": 4,
+                    "image": "https://i.ibb.co/YXCyvRX/coca-cola.webp"
+                }
+            ],
+            "Tacos": [
+                {
+                    "item": "Taco",
+                    "price": 4,
+                    "ingredients": ["Beef/Pork", "Cilantro", "Onion"],
+                    "image": "https://i.ibb.co/4KtJDgF/Taco.webp"
+                }
+            ],
+            "Combos": [
+                {
+                    "description": "Burger and 1 Drink",
+                    "price": 11,
+                    "image": "https://i.ibb.co/PFZ0K5n/Combo-Burger.webp"
+                },
+                {
+                    "description": "1 Hotdog and 1 Drink",
+                    "price": 9,
+                    "image": "https://i.ibb.co/2S7ryCn/Combo-Hotdog.webp"
+                },
+                {
+                    "description": "2 Hotdogs and 2 Drinks",
+                    "price": 18,
+                    "image": "https://i.ibb.co/Bn6xn9s/Combo-Hot-Dog-Doble.webp"
+                },
+                {
+                    "description": "2 Burgers and 2 Drinks",
+                    "price": 22,
+                    "image": "https://i.ibb.co/nwjxgnx/Combo-Burger-Double.webp"
+                },
+                {
+                    "description": "5 Tacos and 1 Drink",
+                    "price": 22,
+                    "image": "https://i.ibb.co/YfcCX3w/TACOS-DE-CABEZA-LOMAS.jpg"
+                }
+            ]
+        };
+
+        function createMenuList(menu) {
+            const menuContainer = document.getElementById('menu');
+            for (const category in menu) {
+                const categoryEl = document.createElement('div');
+                categoryEl.className = 'category';
+                categoryEl.textContent = category;
+                menuContainer.appendChild(categoryEl);
+
+                menu[category].forEach(item => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+
+                    // Add image
+                    const imgEl = document.createElement('img');
+                    imgEl.src = item.image;
+                    imgEl.alt = item.item || item.description;
+                    itemCard.appendChild(imgEl);
+                    
+                    // Add item name and price
+                    const itemNameEl = document.createElement('div');
+                    itemNameEl.className = 'item-name';
+                    itemNameEl.textContent = item.item || item.description;
+                    itemCard.appendChild(itemNameEl);
+
+                    const priceEl = document.createElement('div');
+                    priceEl.className = 'price';
+                    priceEl.textContent = `$${item.price}`;
+                    itemCard.appendChild(priceEl);
+
+                    // Add ingredients in a grid
+                    if (item.ingredients) {
+                        const ingredientsEl = document.createElement('div');
+                        ingredientsEl.className = 'ingredients';
+                        item.ingredients.forEach(ingredient => {
+                            const ingredientItem = document.createElement('div');
+                            ingredientItem.textContent = ingredient;
+                            ingredientsEl.appendChild(ingredientItem);
+                        });
+                        itemCard.appendChild(ingredientsEl);
+                    }
+
+                    menuContainer.appendChild(itemCard);
+                });
+            }
+        }
+
+        // Call the function to create the menu list
+        createMenuList(menuData);
+    </script>
+
+</body>
+</html>
