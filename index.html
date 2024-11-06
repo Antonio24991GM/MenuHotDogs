@@ -11,27 +11,32 @@
             color: #fff;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
             margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
         }
         #menu {
-            background-color: #000;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 1200px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Three-column layout */
-            gap: 20px;
-            text-align: center;
+            width: 100%;
+            max-width: 1600px; /* Allows larger screens to utilize more space */
         }
-        .category {
-            grid-column: span 3;
+        .category-container {
+            margin-bottom: 40px;
+        }
+        .category-title {
             font-size: 2em;
             color: #fff;
-            margin-top: 20px;
+            margin: 20px 0;
             border-bottom: 2px solid #fff;
             padding-bottom: 5px;
+            text-align: center;
+        }
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
         }
         .item-card {
             background-color: #111;
@@ -43,8 +48,9 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
         .item-card img {
-            width: 150px; /* Increased size to 150px */
-            height: 150px;
+            width: 100%; /* Responsive image */
+            max-width: 150px; /* Limits the max size */
+            height: auto;
             border-radius: 8px;
             object-fit: cover;
             margin-bottom: 10px;
@@ -134,10 +140,19 @@
         function createMenuList(menu) {
             const menuContainer = document.getElementById('menu');
             for (const category in menu) {
-                const categoryEl = document.createElement('div');
-                categoryEl.className = 'category';
-                categoryEl.textContent = category;
-                menuContainer.appendChild(categoryEl);
+                // Create category container
+                const categoryContainer = document.createElement('div');
+                categoryContainer.className = 'category-container';
+                
+                // Category title
+                const categoryTitle = document.createElement('div');
+                categoryTitle.className = 'category-title';
+                categoryTitle.textContent = category;
+                categoryContainer.appendChild(categoryTitle);
+
+                // Items grid for each category
+                const itemsGrid = document.createElement('div');
+                itemsGrid.className = 'items-grid';
 
                 menu[category].forEach(item => {
                     const itemCard = document.createElement('div');
@@ -172,8 +187,14 @@
                         itemCard.appendChild(ingredientsEl);
                     }
 
-                    menuContainer.appendChild(itemCard);
+                    itemsGrid.appendChild(itemCard);
                 });
+
+                // Add items grid to category container
+                categoryContainer.appendChild(itemsGrid);
+                
+                // Add category container to menu
+                menuContainer.appendChild(categoryContainer);
             }
         }
 
