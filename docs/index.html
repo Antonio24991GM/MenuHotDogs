@@ -28,12 +28,11 @@
             text-align: center;
             text-decoration: underline;
         }
-        .items-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        .items-container {
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
-            padding: 0;
-            list-style: none;
+            justify-content: center;
         }
         .item {
             background-color: #222;
@@ -41,6 +40,8 @@
             padding: 15px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            flex: 1 1 200px; /* Minimum width of 200px, will expand to fill available space */
+            max-width: 250px; /* Sets a max width for better layout control */
         }
         .item img {
             width: 100px;
@@ -70,64 +71,64 @@
     <div id="menu-container">
 
         <div class="category">Hotdogs & Burgers</div>
-        <ul class="items-grid">
-            <li class="item">
+        <div class="items-container">
+            <div class="item">
                 <img src="./Burger.jpg" alt="Burger">
                 <div class="item-name">Burger</div>
                 <div class="price">$8</div>
                 <div class="ingredients">Cheese, Beef meat, Lettuce, Onion</div>
-            </li>
-            <li class="item">
+            </div>
+            <div class="item">
                 <img src="./hotdog.jpg" alt="Hotdog">
                 <div class="item-name">Hotdog</div>
                 <div class="price">$6</div>
                 <div class="ingredients">Beef, Bacon, Onion, Tomato</div>
-            </li>
-            <li class="item">
+            </div>
+            <div class="item">
                 <img src="./coca-cola.jpg" alt="Drink">
                 <div class="item-name">Drink</div>
                 <div class="price">$4</div>
-            </li>
-        </ul>
+            </div>
+        </div>
 
         <div class="category">Tacos</div>
-        <ul class="items-grid">
-            <li class="item">
+        <div class="items-container">
+            <div class="item">
                 <img src="./Taco.jpg" alt="Taco">
                 <div class="item-name">Taco</div>
                 <div class="price">$4</div>
                 <div class="ingredients">Beef/Pork, Cilantro, Onion</div>
-            </li>
-        </ul>
+            </div>
+        </div>
 
         <div class="category">Combos</div>
-        <ul class="items-grid">
-            <li class="item">
+        <div class="items-container">
+            <div class="item">
                 <img src="./Combo-Burger.jpg" alt="Burger and 1 Drink">
                 <div class="item-name">Burger and 1 Drink</div>
                 <div class="price">$11</div>
-            </li>
-            <li class="item">
+            </div>
+            <div class="item">
                 <img src="./Combo-Hotdog.jpg" alt="1 Hotdog and 1 Drink">
                 <div class="item-name">1 Hotdog and 1 Drink</div>
                 <div class="price">$9</div>
-            </li>
-            <li class="item">
-                <img src="./Combo-HotDog-Doble.jpg" alt="2 Hotdogs and 2 Drinks">
+            </div>
+            <div class="item">
+                <img src="./Combo-Hot-Dog-Doble.jpg" alt="2 Hotdogs and 2 Drinks">
                 <div class="item-name">2 Hotdogs and 2 Drinks</div>
                 <div class="price">$18</div>
-            </li>
-            <li class="item">
+            </div>
+            <div class="item">
                 <img src="./Combo-Burger-Double.jpg" alt="2 Burgers and 2 Drinks">
                 <div class="item-name">2 Burgers and 2 Drinks</div>
                 <div class="price">$22</div>
-            </li>
-            <li class="item">
-                <img src="./OrderTaco.jpg" alt="5 Tacos and 1 Drink">
+            </div>
+            <div class="item">
+                <img src="./Order-Taco.jpg" alt="5 Tacos and 1 Drink">
                 <div class="item-name">5 Tacos and 1 Drink</div>
                 <div class="price">$20</div>
-            </li>
-        </ul>
+            </div>
+        </div>
 
     </div>
 
