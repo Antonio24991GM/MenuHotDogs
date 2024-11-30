@@ -9,23 +9,22 @@
             font-family: 'Arial', sans-serif;
             background-color: #000;
             color: #fff;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
         }
         #menu {
             width: 100%;
-            max-width: 1600px; /* Allows larger screens to utilize more space */
         }
         .category-container {
             margin-bottom: 40px;
         }
         .category-title {
-            font-size: 2em;
+            font-size: 4em;
             color: #fff;
             margin: 20px 0;
             border-bottom: 2px solid #fff;
@@ -34,7 +33,7 @@
         }
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             text-align: center;
         }
@@ -47,31 +46,46 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
+        .combo-number {
+            font-size: 1.8em;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
         .item-card img {
-            width: 100%; /* Responsive image */
-            max-width: 150px; /* Limits the max size */
+            width: 100%;
+            max-width: 300px;
             height: auto;
             border-radius: 8px;
             object-fit: cover;
             margin-bottom: 10px;
         }
         .item-name {
-            font-size: 1.2em;
+            font-size: 2.4em;
             font-weight: bold;
             margin: 10px 0;
             color: #fff;
         }
         .price {
-            color: #fff;
-            font-size: 1em;
+            color: #ffd700;
+            font-size: 2em;
             margin-bottom: 10px;
         }
         .ingredients {
             display: grid;
-            grid-template-columns: repeat(2, auto); /* Two-column grid for ingredients */
+            grid-template-columns: repeat(2, auto);
             gap: 5px;
             color: #ccc;
-            font-size: 0.9em;
+            font-size: 1.8em;
+        }
+        @media (min-width: 768px) {
+            .category-title { font-size: 4.5em; }
+            .item-name { font-size: 2.8em; }
+            .price { font-size: 2.4em; }
+        }
+        @media (min-width: 1200px) {
+            .category-title { font-size: 5em; }
+            .item-name { font-size: 3em; }
+            .price { font-size: 2.8em; }
         }
     </style>
 </head>
@@ -84,55 +98,83 @@
             "Hotdogs & Burgers": [
                 {
                     "item": "Burger",
-                    "price": 8,
+                    "price": 9,
                     "ingredients": ["Cheese", "Beef meat", "Lettuce", "Onion"],
                     "image": "https://i.ibb.co/pvpyv4W/Burger.webp"
                 },
                 {
                     "item": "Hotdog",
-                    "price": 6,
+                    "price": 7,
                     "ingredients": ["Beef", "Bacon", "Onion", "Tomato"],
                     "image": "https://i.ibb.co/s3hFnzY/hotdog.webp"
                 },
                 {
+                    "item": "Fries",
+                    "price": 5,
+                    "ingredients": ["Fries"],
+                    "image": "https://i.ibb.co/tZFGXVL/Fries.webp"
+                },
+                {
                     "item": "Drink",
                     "price": 4,
+                    "ingredients": ["Coca-Cola", "Sprite", "Jarritos"],
                     "image": "https://i.ibb.co/YXCyvRX/coca-cola.webp"
-                }
-            ],
-            "Tacos": [
+                },
                 {
                     "item": "Taco",
                     "price": 4,
                     "ingredients": ["Beef/Pork", "Cilantro", "Onion"],
                     "image": "https://i.ibb.co/4KtJDgF/Taco.webp"
+                },
+                {
+                    "item": "Salchipulpos",
+                    "price": 7,
+                    "ingredients": ["Fries", "Beef", "Links", "Fried"],
+                    "image": "https://i.ibb.co/wJ2xdYd/DALL-E-2024-11-17-15-32-35-A-side-perspective-view-of-a-plate-of-crispy-french-fries-with-small-cyli.webp"
+                },
+                {
+                    "item": "Qusadilla de Pastor",
+                    "price": 8,
+                    "ingredients": ["Pork", "Cilantro", "Onion", "Salsa"],
+                    "image": "https://i.ibb.co/JpxZJ9Y/quesadilladepastor2.webp"
                 }
             ],
             "Combos": [
                 {
-                    "description": "Burger and 1 Drink",
-                    "price": 11,
+                    "comboNumber": 1,
+                    "description": "Burger + Fries + Drink",
+                    "price": 13,
                     "image": "https://i.ibb.co/PFZ0K5n/Combo-Burger.webp"
                 },
                 {
-                    "description": "1 Hotdog and 1 Drink",
-                    "price": 9,
+                    "comboNumber": 2,
+                    "description": "Hotdog + Fries + Drink",
+                    "price": 11,
                     "image": "https://i.ibb.co/2S7ryCn/Combo-Hotdog.webp"
                 },
                 {
-                    "description": "2 Hotdogs and 2 Drinks",
+                    "comboNumber": 3,
+                    "description": "2 Hotdogs + Fries + 2 Drinks",
                     "price": 18,
                     "image": "https://i.ibb.co/Bn6xn9s/Combo-Hot-Dog-Doble.webp"
                 },
                 {
-                    "description": "2 Burgers and 2 Drinks",
-                    "price": 22,
+                    "comboNumber": 4,
+                    "description": "1 Hotdog & Burger & Fries + 2 Drinks",
+                    "price": 20,
+                    "image": "https://i.ibb.co/8cBGdPJ/Burger-Dogo-Drink2drinks.webp"
+                },
+                {
+                    "comboNumber": 5,
+                    "description": "2 Burgers + Fries + 2 Drinks",
+                    "price": 23,
                     "image": "https://i.ibb.co/nwjxgnx/Combo-Burger-Double.webp"
                 },
                 {
-                    "description": "5 Tacos and 1 Drink",
-                    "price": 22,
-                    "image": "https://i.ibb.co/YfcCX3w/TACOS-DE-CABEZA-LOMAS.jpg"
+                    "comboNumber": 6,
+                    "description": "5 Tacos + Coca-cola",
+                    "price": 23,
+                    "image": "https://i.ibb.co/yfhCJFr/Order-Taco.webp"
                 }
             ]
         };
@@ -140,17 +182,14 @@
         function createMenuList(menu) {
             const menuContainer = document.getElementById('menu');
             for (const category in menu) {
-                // Create category container
                 const categoryContainer = document.createElement('div');
                 categoryContainer.className = 'category-container';
                 
-                // Category title
                 const categoryTitle = document.createElement('div');
                 categoryTitle.className = 'category-title';
                 categoryTitle.textContent = category;
                 categoryContainer.appendChild(categoryTitle);
 
-                // Items grid for each category
                 const itemsGrid = document.createElement('div');
                 itemsGrid.className = 'items-grid';
 
@@ -158,13 +197,18 @@
                     const itemCard = document.createElement('div');
                     itemCard.className = 'item-card';
 
-                    // Add image
+                    if (item.comboNumber) {
+                        const comboNumberEl = document.createElement('div');
+                        comboNumberEl.className = 'combo-number';
+                        comboNumberEl.textContent = `Combo #${item.comboNumber}`;
+                        itemCard.appendChild(comboNumberEl);
+                    }
+
                     const imgEl = document.createElement('img');
                     imgEl.src = item.image;
                     imgEl.alt = item.item || item.description;
                     itemCard.appendChild(imgEl);
                     
-                    // Add item name and price
                     const itemNameEl = document.createElement('div');
                     itemNameEl.className = 'item-name';
                     itemNameEl.textContent = item.item || item.description;
@@ -175,7 +219,6 @@
                     priceEl.textContent = `$${item.price}`;
                     itemCard.appendChild(priceEl);
 
-                    // Add ingredients in a grid
                     if (item.ingredients) {
                         const ingredientsEl = document.createElement('div');
                         ingredientsEl.className = 'ingredients';
@@ -190,15 +233,11 @@
                     itemsGrid.appendChild(itemCard);
                 });
 
-                // Add items grid to category container
                 categoryContainer.appendChild(itemsGrid);
-                
-                // Add category container to menu
                 menuContainer.appendChild(categoryContainer);
             }
         }
 
-        // Call the function to create the menu list
         createMenuList(menuData);
     </script>
 
