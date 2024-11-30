@@ -2,149 +2,244 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Menu Board</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-            text-align: center;
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #fff;
             margin: 0;
             padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
         }
-        .category {
-            font-size: 28px;
-            color: #ffffff;
-            margin-top: 30px;
-            margin-bottom: 10px;
-            text-align: center;
-            text-decoration: underline;
-        }
-        .menu-table {
+        #menu {
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            border-spacing: 20px;
         }
-        .item-cell {
-            background-color: #222;
-            border-radius: 10px;
-            padding: 15px;
+        .category-container {
+            margin-bottom: 40px;
+        }
+        .category-title {
+            font-size: 4em;
+            color: #fff;
+            margin: 20px 0;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 5px;
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            vertical-align: top;
-            width: 200px;
         }
-        .item img {
-            width: 100px;
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .item-card {
+            background-color: #111;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        .combo-number {
+            font-size: 1.8em;
+            color: #ffcc00;
+            margin-bottom: 10px;
+        }
+        .item-card img {
+            width: 100%;
+            max-width: 300px;
             height: auto;
             border-radius: 8px;
+            object-fit: cover;
             margin-bottom: 10px;
         }
         .item-name {
-            font-size: 18px;
+            font-size: 2.4em;
             font-weight: bold;
+            margin: 10px 0;
             color: #fff;
-            margin: 5px 0;
         }
         .price {
             color: #ffd700;
-            font-size: 16px;
-            margin: 5px 0;
+            font-size: 2em;
+            margin-bottom: 10px;
         }
         .ingredients {
-            font-size: 14px;
-            color: lightgray;
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            gap: 5px;
+            color: #ccc;
+            font-size: 1.8em;
+        }
+        @media (min-width: 768px) {
+            .category-title { font-size: 4.5em; }
+            .item-name { font-size: 2.8em; }
+            .price { font-size: 2.4em; }
+        }
+        @media (min-width: 1200px) {
+            .category-title { font-size: 5em; }
+            .item-name { font-size: 3em; }
+            .price { font-size: 2.8em; }
         }
     </style>
 </head>
 <body>
 
-    <div class="category">Hotdogs & Burgers</div>
-    <table class="menu-table">
-        <tr>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./Burger.jpg" alt="Burger">
-                    <div class="item-name">Burger</div>
-                    <div class="price">$8</div>
-                    <div class="ingredients">Cheese, Beef meat, Lettuce, Onion</div>
-                </div>
-            </td>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./hotdog.jpg" alt="Hotdog">
-                    <div class="item-name">Hotdog</div>
-                    <div class="price">$6</div>
-                    <div class="ingredients">Beef, Bacon, Onion, Tomato</div>
-                </div>
-            </td>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./coca-cola.jpg" alt="Drink">
-                    <div class="item-name">Drink</div>
-                    <div class="price">$4</div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <div id="menu"></div>
 
-    <div class="category">Tacos</div>
-    <table class="menu-table">
-        <tr>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./Taco.jpg" alt="Taco">
-                    <div class="item-name">Taco</div>
-                    <div class="price">$4</div>
-                    <div class="ingredients">Beef/Pork, Cilantro, Onion</div>
-                </div>
-            </td>
-        </tr>
-    </table>
+    <script>
+        const menuData = {
+            "Hotdogs & Burgers": [
+                {
+                    "item": "Burger",
+                    "price": 9,
+                    "ingredients": ["Cheese", "Beef meat", "Lettuce", "Onion"],
+                    "image": "https://i.ibb.co/pvpyv4W/Burger.webp"
+                },
+                {
+                    "item": "Hotdog",
+                    "price": 7,
+                    "ingredients": ["Beef", "Bacon", "Onion", "Tomato"],
+                    "image": "https://i.ibb.co/s3hFnzY/hotdog.webp"
+                },
+                {
+                    "item": "Fries",
+                    "price": 5,
+                    "ingredients": ["Fries"],
+                    "image": "https://i.ibb.co/tZFGXVL/Fries.webp"
+                },
+                {
+                    "item": "Drink",
+                    "price": 2,
+                    "ingredients": ["Coca-Cola", "Sprite", "Jarritos"],
+                    "image": "https://i.ibb.co/FH5kQCW/drinks.webp"
+                },
+                {
+                    "item": "Taco",
+                    "price": 4,
+                    "ingredients": ["Beef/Pork", "Cilantro", "Onion"],
+                    "image": "https://i.ibb.co/4KtJDgF/Taco.webp"
+                },
+                {
+                    "item": "Salchipulpos",
+                    "price": 7,
+                    "ingredients": ["Fries", "Beef", "Links", "Fried"],
+                    "image": "https://i.ibb.co/wJ2xdYd/DALL-E-2024-11-17-15-32-35-A-side-perspective-view-of-a-plate-of-crispy-french-fries-with-small-cyli.webp"
+                },
+                {
+                    "item": "Qusadilla de Pastor",
+                    "price": 8,
+                    "ingredients": ["Pork", "Cilantro", "Onion", "Salsa"],
+                    "image": "https://i.ibb.co/JpxZJ9Y/quesadilladepastor2.webp"
+                }
+            ],
+            "Combos": [
+                {
+                    "comboNumber": 1,
+                    "description": "Burger + Fries + Drink",
+                    "price": 13,
+                    "image": "https://i.ibb.co/PFZ0K5n/Combo-Burger.webp"
+                },
+                {
+                    "comboNumber": 2,
+                    "description": "Hotdog + Fries + Drink",
+                    "price": 11,
+                    "image": "https://i.ibb.co/2S7ryCn/Combo-Hotdog.webp"
+                },
+                {
+                    "comboNumber": 3,
+                    "description": "2 Hotdogs + Fries + 2 Drinks",
+                    "price": 18,
+                    "image": "https://i.ibb.co/Bn6xn9s/Combo-Hot-Dog-Doble.webp"
+                },
+                {
+                    "comboNumber": 4,
+                    "description": "1 Hotdog & Burger & Fries + 2 Drinks",
+                    "price": 20,
+                    "image": "https://i.ibb.co/8cBGdPJ/Burger-Dogo-Drink2drinks.webp"
+                },
+                {
+                    "comboNumber": 5,
+                    "description": "2 Burgers + Fries + 2 Drinks",
+                    "price": 23,
+                    "image": "https://i.ibb.co/nwjxgnx/Combo-Burger-Double.webp"
+                },
+                {
+                    "comboNumber": 6,
+                    "description": "5 Tacos + Coca-cola",
+                    "price": 23,
+                    "image": "https://i.ibb.co/yfhCJFr/Order-Taco.webp"
+                }
+            ]
+        };
 
-    <div class="category">Combos</div>
-    <table class="menu-table">
-        <tr>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./Combo-Burger.jpg" alt="Burger and 1 Drink">
-                    <div class="item-name">Burger and 1 Drink</div>
-                    <div class="price">$11</div>
-                </div>
-            </td>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./Combo-Hotdog.jpg" alt="1 Hotdog and 1 Drink">
-                    <div class="item-name">1 Hotdog and 1 Drink</div>
-                    <div class="price">$9</div>
-                </div>
-            </td>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./Combo-Hot-Dog-Doble.jpg" alt="2 Hotdogs and 2 Drinks">
-                    <div class="item-name">2 Hotdogs and 2 Drinks</div>
-                    <div class="price">$18</div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./Combo-Burger-Double.jpg" alt="2 Burgers and 2 Drinks">
-                    <div class="item-name">2 Burgers and 2 Drinks</div>
-                    <div class="price">$22</div>
-                </div>
-            </td>
-            <td class="item-cell">
-                <div class="item">
-                    <img src="./Order-Taco.jpg" alt="5 Tacos and 1 Drink">
-                    <div class="item-name">5 Tacos and 1 Drink</div>
-                    <div class="price">$20</div>
-                </div>
-            </td>
-        </tr>
-    </table>
+        function createMenuList(menu) {
+            const menuContainer = document.getElementById('menu');
+            for (const category in menu) {
+                const categoryContainer = document.createElement('div');
+                categoryContainer.className = 'category-container';
+                
+                const categoryTitle = document.createElement('div');
+                categoryTitle.className = 'category-title';
+                categoryTitle.textContent = category;
+                categoryContainer.appendChild(categoryTitle);
+
+                const itemsGrid = document.createElement('div');
+                itemsGrid.className = 'items-grid';
+
+                menu[category].forEach(item => {
+                    const itemCard = document.createElement('div');
+                    itemCard.className = 'item-card';
+
+                    if (item.comboNumber) {
+                        const comboNumberEl = document.createElement('div');
+                        comboNumberEl.className = 'combo-number';
+                        comboNumberEl.textContent = `Combo #${item.comboNumber}`;
+                        itemCard.appendChild(comboNumberEl);
+                    }
+
+                    const imgEl = document.createElement('img');
+                    imgEl.src = item.image;
+                    imgEl.alt = item.item || item.description;
+                    itemCard.appendChild(imgEl);
+                    
+                    const itemNameEl = document.createElement('div');
+                    itemNameEl.className = 'item-name';
+                    itemNameEl.textContent = item.item || item.description;
+                    itemCard.appendChild(itemNameEl);
+
+                    const priceEl = document.createElement('div');
+                    priceEl.className = 'price';
+                    priceEl.textContent = `$${item.price}`;
+                    itemCard.appendChild(priceEl);
+
+                    if (item.ingredients) {
+                        const ingredientsEl = document.createElement('div');
+                        ingredientsEl.className = 'ingredients';
+                        item.ingredients.forEach(ingredient => {
+                            const ingredientItem = document.createElement('div');
+                            ingredientItem.textContent = ingredient;
+                            ingredientsEl.appendChild(ingredientItem);
+                        });
+                        itemCard.appendChild(ingredientsEl);
+                    }
+
+                    itemsGrid.appendChild(itemCard);
+                });
+
+                categoryContainer.appendChild(itemsGrid);
+                menuContainer.appendChild(categoryContainer);
+            }
+        }
+
+        createMenuList(menuData);
+    </script>
 
 </body>
 </html>
