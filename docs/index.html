@@ -87,6 +87,36 @@
             .item-name { font-size: 3em; }
             .price { font-size: 2.8em; }
         }
+        .price-options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+        
+        .price-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1b1b1b;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 1.3em;
+            color: #fff;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .price-option .option-label {
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .price-option .option-price {
+            color: #ffd700;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -140,10 +170,11 @@
                 },
                 {
                     "item": "Taco",
-                    "price": 4,
-                    "ingredients": ["Beef/Pork/Chorizo", "Cilantro", "Onion"],
-                    "price": 5,
-                    "ingredients": ["Cabeza/Lengua/Cachete", "Cilantro", "Onion"],
+                    "options": [
+                        { "label": "Beef/Pork/Chorizo", "price": 4 },
+                        { "label": "Cabeza/Lengua/Cachete", "price": 5 }
+                    ],
+                    "ingredients": ["Cilantro", "Onion"],
                     "image": "https://i.ibb.co/4KtJDgF/Taco.webp"
                 },
                 {
@@ -153,10 +184,12 @@
                     "image": "https://i.ibb.co/wJ2xdYd/DALL-E-2024-11-17-15-32-35-A-side-perspective-view-of-a-plate-of-crispy-french-fries-with-small-cyli.webp"
                 },
                 {
-                    "item": "Qusadilla de Pastor or Suadero",
-                    "price": 8,
-                    "price": 15,
-                    "ingredients": ["Pork", "Cilantro", "Onion", "Salsa"],
+                    "item": "Quesadilla",
+                    "options": [
+                        { "label": "Small", "price": 8 },
+                        { "label": "Grande", "price": 15 }
+                    ],
+                    "ingredients": ["Pastor or Suadero", "Cilantro", "Onion", "Salsa"],
                     "image": "https://i.ibb.co/JpxZJ9Y/quesadilladepastor2.webp"
                 },
                 {
@@ -247,10 +280,34 @@
                     itemNameEl.textContent = item.item || item.description;
                     itemCard.appendChild(itemNameEl);
 
-                    const priceEl = document.createElement('div');
-                    priceEl.className = 'price';
-                    priceEl.textContent = `$${item.price}`;
-                    itemCard.appendChild(priceEl);
+                    if (item.options && Array.isArray(item.options)) {
+                        const optionsEl = document.createElement('div');
+                        optionsEl.className = 'price-options';
+                
+                        item.options.forEach(option => {
+                        const optionRow = document.createElement('div');
+                        optionRow.className = 'price-option';
+                
+                        const labelEl = document.createElement('span');
+                        labelEl.className = 'option-label';
+                        labelEl.textContent = option.label;
+                
+                        const priceEl = document.createElement('span');
+                        priceEl.className = 'option-price';
+                        priceEl.textContent = `$${option.price}`;
+                
+                        optionRow.appendChild(labelEl);
+                        optionRow.appendChild(priceEl);
+                        optionsEl.appendChild(optionRow);
+                    });
+                
+                        itemCard.appendChild(optionsEl);
+                    } else {
+                        const priceEl = document.createElement('div');
+                        priceEl.className = 'price';
+                        priceEl.textContent = `$${item.price}`;
+                        itemCard.appendChild(priceEl);
+                    }
 
                     if (item.ingredients) {
                         const ingredientsEl = document.createElement('div');
