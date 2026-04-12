@@ -10,135 +10,82 @@
             background-color: #000;
             color: #fff;
             margin: 0;
-            padding: 10px;
+            padding: 20px;
             box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
             min-height: 100vh;
-            overflow: hidden;
         }
-        
         #menu {
             width: 100%;
         }
-        
         .category-container {
-            margin-bottom: 18px;
+            margin-bottom: 40px;
         }
-        
         .category-title {
-            font-size: 2.4em;
+            font-size: 4em;
             color: #fff;
-            margin: 8px 0 12px 0;
+            margin: 20px 0;
             border-bottom: 2px solid #fff;
-            padding-bottom: 4px;
+            padding-bottom: 5px;
             text-align: center;
         }
-        
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             text-align: center;
         }
-        
         .item-card {
             background-color: #111;
             border-radius: 10px;
-            padding: 10px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            min-height: 0;
         }
-        
         .combo-number {
-            font-size: 1.1em;
+            font-size: 1.8em;
             color: #ffcc00;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
         }
-        
         .item-card img {
             width: 100%;
-            max-width: 180px;
-            height: 110px;
+            max-width: 300px;
+            height: auto;
             border-radius: 8px;
             object-fit: cover;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
-        
         .item-name {
-            font-size: 1em;
+            font-size: 2.4em;
             font-weight: bold;
-            margin: 6px 0;
+            margin: 10px 0;
             color: #fff;
-            line-height: 1.05;
         }
-        
         .price {
             color: #ffd700;
-            font-size: 1.8em;
-            margin-bottom: 6px;
-            line-height: 1;
+            font-size: 2em;
+            margin-bottom: 10px;
         }
-        
         .ingredients {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 4px 10px;
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            gap: 5px;
             color: #ccc;
-            font-size: 0.95em;
-            line-height: 1.1;
+            font-size: 1.8em;
         }
-        
-        .price-options {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-bottom: 8px;
-            width: 100%;
+        @media (min-width: 768px) {
+            .category-title { font-size: 4.5em; }
+            .item-name { font-size: 2.8em; }
+            .price { font-size: 2.4em; }
         }
-        
-        .price-option {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #1b1b1b;
-            padding: 6px 8px;
-            border-radius: 8px;
-            font-size: 0.95em;
-            color: #fff;
-            width: 100%;
-            box-sizing: border-box;
-            gap: 8px;
-        }
-        
-        .price-option .option-label {
-            color: #fff;
-            font-weight: bold;
-            text-align: left;
-            line-height: 1.1;
-            white-space: normal;
-            word-break: break-word;
-            flex: 1;
-        }
-        
-        .price-option .option-price {
-            color: #ffd700;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
-        
-        @media (max-width: 1400px) {
-            .items-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-        
-        @media (max-width: 1100px) {
-            .items-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
+        @media (min-width: 1200px) {
+            .category-title { font-size: 5em; }
+            .item-name { font-size: 3em; }
+            .price { font-size: 2.8em; }
         }
     </style>
 </head>
@@ -159,6 +106,12 @@
                     "item": "Bacon Egg Burger",
                     "price": 13,
                     "ingredients": ["Cheese", "Beef meat", "Egg", "Bacon", "Lettuce", "Onion"],
+                    "image": "https://i.ibb.co/jWrd3RN/Bacon.webp"
+                },
+                {
+                    "item": "Hawaiian Burger",
+                    "price": 16,
+                    "ingredients": ["Cheese", "Beef meat", "Pineapple", "Sausage", "Mozzarella", "Bacon", "Lettuce", "Onion"],
                     "image": "https://i.ibb.co/jWrd3RN/Bacon.webp"
                 },
                 {
@@ -187,11 +140,10 @@
                 },
                 {
                     "item": "Taco",
-                    "options": [
-                        { "label": "Beef/Pork/\nChorizo", "price": 4 },
-                        { "label": "Cabeza/Lengua//\nCachete", "price": 5 }
+                    "prices": [
+                        {"price": 4, "ingredients": ["Beef/", "Pork/", "Chorizo", "Cilantro", "Onion"]},
+                        {"price": 5, "ingredients": ["Cabeza/", "Lengua/", "Cachete", "Cilantro", "Onion"]}
                     ],
-                    "ingredients": ["Cilantro", "Onion"],
                     "image": "https://i.ibb.co/4KtJDgF/Taco.webp"
                 },
                 {
@@ -201,12 +153,12 @@
                     "image": "https://i.ibb.co/wJ2xdYd/DALL-E-2024-11-17-15-32-35-A-side-perspective-view-of-a-plate-of-crispy-french-fries-with-small-cyli.webp"
                 },
                 {
-                    "item": "Quesadilla",
-                    "options": [
-                        { "label": "Small", "price": 8 },
-                        { "label": "Grande", "price": 15 }
+                    "item": "Qusadilla de Pastor or Suadero",
+                    "prices": [
+                        {"price": 8, "ingredients": ["Mediana"]},
+                        {"price": 15, "ingredients": ["Grande"]}
                     ],
-                    "ingredients": ["Pastor or Suadero", "Cilantro", "Onion", "Salsa"],
+                    "ingredients": ["Pork", "Cilantro", "Onion", "Salsa"],
                     "image": "https://i.ibb.co/JpxZJ9Y/quesadilladepastor2.webp"
                 },
                 {
@@ -232,13 +184,13 @@
                 {
                     "comboNumber": 3,
                     "description": "2 Hotdogs + Fries + 2 Soda Can",
-                    "price": 22,
+                    "price": 23,
                     "image": "https://i.ibb.co/Bn6xn9s/Combo-Hot-Dog-Doble.webp"
                 },
                 {
                     "comboNumber": 4,
                     "description": "1 Hotdog & Burger & Fries + 2 Soda Can",
-                    "price": 23,
+                    "price": 24,
                     "image": "https://i.ibb.co/8cBGdPJ/Burger-Dogo-Drink2drinks.webp"
                 },
                 {
@@ -249,7 +201,7 @@
                 },
                 {
                     "comboNumber": 6,
-                    "description": "5 Tacos Pastor o Suadero + Soda Can",
+                    "description": "5 Tacos Pastor o Suadero + Soda",
                     "price": 24,
                     "image": "https://i.ibb.co/yfhCJFr/Order-Taco.webp"
                 }
@@ -291,28 +243,24 @@
                     itemNameEl.textContent = item.item || item.description;
                     itemCard.appendChild(itemNameEl);
 
-                    if (item.options && Array.isArray(item.options)) {
-                        const optionsEl = document.createElement('div');
-                        optionsEl.className = 'price-options';
-                
-                        item.options.forEach(option => {
-                        const optionRow = document.createElement('div');
-                        optionRow.className = 'price-option';
-                
-                        const labelEl = document.createElement('span');
-                        labelEl.innerHTML = option.label.replace(/\n/g, "<br>");
-                        labelEl.textContent = option.label;
-                
-                        const priceEl = document.createElement('span');
-                        priceEl.className = 'option-price';
-                        priceEl.textContent = `$${option.price}`;
-                
-                        optionRow.appendChild(labelEl);
-                        optionRow.appendChild(priceEl);
-                        optionsEl.appendChild(optionRow);
-                    });
-                
-                        itemCard.appendChild(optionsEl);
+                    if (item.prices) {
+                        item.prices.forEach(priceObj => {
+                            const priceEl = document.createElement('div');
+                            priceEl.className = 'price';
+                            priceEl.textContent = `$${priceObj.price}`;
+                            itemCard.appendChild(priceEl);
+
+                            if (priceObj.ingredients) {
+                                const ingredientsEl = document.createElement('div');
+                                ingredientsEl.className = 'ingredients';
+                                priceObj.ingredients.forEach(ingredient => {
+                                    const ingredientItem = document.createElement('div');
+                                    ingredientItem.textContent = ingredient;
+                                    ingredientsEl.appendChild(ingredientItem);
+                                });
+                                itemCard.appendChild(ingredientsEl);
+                            }
+                        });
                     } else {
                         const priceEl = document.createElement('div');
                         priceEl.className = 'price';
